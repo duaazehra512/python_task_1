@@ -1,32 +1,3 @@
-# import streamlit as st
-# import pandas as pd
-# import os
-# from io import BytesIO
-
-# st.set_page_config(page_title=="Data Sweeper" ,layout="wide")
-
-# #css
-# st.markdown(
-
-#     """
-#     <style>
-#     .stApp{
-#         background-colour: black;
-#         colour:white;
-#         }    
-#         </style>
-#         """,
-#         unsafe_allow_html=True
-# )
-
-# #title
-# st.title("Datasweeper Sterling Integrator By Duaa Raza")
-# st.write("Transform your files between CSV and Excel formats with built-in data cleaning and visualization creating the project for quarter 3 ")
-
-
-
-
-
 import streamlit as st
 import random
 import pandas as pd
@@ -86,10 +57,19 @@ if challenge_button:
     belief_to_sweep = random.choice(beliefs)
     st.write(f"Your belief: '{belief_to_sweep}'")
 
-    if st.button("Sweep It Away!"):
+    if st.button(f"Sweep '{belief_to_sweep}' Away!"):
+        # Remove the belief from the list
+        beliefs.remove(belief_to_sweep)
         st.success(f"You've just swept away: '{belief_to_sweep}'")
-        # Update user progress or store the data (this can be enhanced with a real database)
-        st.write("Well done! Keep building your growth mindset.")
+        st.write("Keep building your growth mindset!")
+        
+        # Give a new belief to the user
+        if beliefs:
+            new_belief = random.choice(beliefs)
+            st.write(f"New belief to overcome: '{new_belief}'")
+        else:
+            st.write("Congratulations! You've swept away all the limiting beliefs for today.")
+            beliefs = ["I'm not good enough", "I will fail", "I can't learn new things", "Success is for others, not me"]  # Reset beliefs for the next round
 
 # Progress Tracker
 if progress_button:
